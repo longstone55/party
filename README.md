@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Next.js(App Router)와 Tailwind CSS를 사용하여 '잭슨파티(Jackson Party)' 예약 시스템의 프론트엔드 폼을 구현해줘. 디자인은 다크 모드 베이스에 블루/퍼플 네온 포인트를 사용하여 가독성 높고 세련된 파티 분위기로 제작해줘.
 
-## Getting Started
+- **인원수 연동:** '참가자 추가' 버튼을 통해 인원수만큼 이름과 생년월일(연/월/일 선택) 입력 칸이 동적으로 추가되어야 함.
 
-First, run the development server:
+### 2. 입력 필드 상세 (영카트 DB 필드 매핑)
+- **예약 정보:**
+  - 예약자 성함 (`od_name`)
+  - 비밀번호 (`od_pwd`, 영문/숫자 3~20자)
+  - 성별 (`od_data6`, 라디오 버튼: 남성/여성)
+  - 연락처 (`pnum1`, `pnum2`, `pnum3` 조합하여 `od_hp`로 전송)
+  - 거주지 (`od_addr1`, 광역시/도 선택 셀렉트 박스)
+- **참가자 정보 (배열 처리):**
+  - 이름 (`od_name_n`) 및 생년월일 (`year_n`, `month_n`, `day_n`)
+- **환불 및 기타:**
+  - 환불 은행 (`od_data2`), 계좌번호 (`od_data3`), 예금주 (`od_data4`)
+  - 요청사항 (`od_memo`, Textarea)
+- **동의 항목 (Checkbox):**
+  - 파티 규정 및 취소 불가 동의 (필수, `personal_info_consent2`)
+  - 개인정보 수집 동의 (필수, `personal_info_consent`)
+  - 광고성 정보 수신 동의 (선택, `marketing_consent`)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 3. UI/UX 요구사항
+- 날짜 선택을 위한 캘린더 UI (`react-day-picker` 사용 권장)
+- 연령 제한 위반 시 즉시 에러 메시지 노출 및 예약 버튼 비활성화
+- 모바일에서 사용하기 편한 반응형 테이블 또는 카드 레이아웃
+- '무통장 입금' 안내 문구 및 최종 결제 금액(인원수 x 성별 가격) 실시간 표시
